@@ -33,11 +33,21 @@ func UpdateemployeerTable(oldname string, newname string) (*mongo.UpdateResult, 
 	return result, nil
 }
 func DeleteEmployeeTable(id *models.Deleteid) (*mongo.DeleteResult, error) {
-    cust_id := id.Id
-    filter := bson.D{{Key: "id", Value: cust_id}}
-    result, err := EmployeeTableCollection.DeleteOne(ctx, filter)
-    if err != nil {
-        return nil, err
-    }
-    return result, nil
+	cust_id := id.Id
+	filter := bson.D{{Key: "id", Value: cust_id}}
+	result, err := EmployeeTableCollection.DeleteOne(ctx, filter)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+func GetCustomerById(id int64) (*models.Employee, error) {
+	filter := bson.D{{Key: "customer_id", Value: id}}
+	var customer *models.Employee
+	res := EmployeeTableCollection.FindOne(ctx, filter)
+	err := res.Decode(&customer)
+	if err != nil {
+		return nil, err
+	}
+	return customer, nil
 }

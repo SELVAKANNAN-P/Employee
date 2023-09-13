@@ -3,7 +3,10 @@ package controllers
 import (
 	"employee/models"
 	"employee/service"
+	"encoding/json"
+	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -50,4 +53,18 @@ func DeleteEmployeeTable(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{"status": "success", "data": result})
+}
+
+func GetCustomerById(ctx *gin.Context){
+    id:= ctx.Param("id")
+    id1,err := strconv.ParseInt(id,10,64)
+    if(err!=nil){
+        ctx.JSON(http.StatusBadGateway, gin.H{"status": "fail", "message": err.Error()})
+    }
+    val, err :service.GetEmlpoyeeById(id1)
+    if(err!=nil){
+        ctx.JSON(http.StatusBadGateway, gin.H{"status": "fail", "message": err.Error()})
+
+    }
+    ctx.JSON(http.StatusCreated, gin.H{"status": "success", "data": val})
 }
