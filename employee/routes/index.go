@@ -11,6 +11,41 @@ func CustomerTableRoute(router *gin.Engine) {
 	router.GET("/Employee/getbyid", controllers.GetEmployeeById)
 	router.PUT("/Employee/ubdatebyid", controllers.UpdateEmployeeTable)
 	router.DELETE("/Employee/deleteid", controllers.DeleteEmployeeTable)
-
+	
+	
 }
 
+
+
+//router.GET("/api/employees", controllers.GetEmployeesHandler)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//router.GET("/api/employees", controllers.GetEmployeesHandler)

@@ -5,27 +5,8 @@ import (
 	"employee/service"
 	"net/http"
 
-
-	// "strconv"
-
 	"github.com/gin-gonic/gin"
 )
-
-// func CreateEmployeeTable(ctx *gin.Context) {
-//     var profile models.Employee
-//     if err := ctx.ShouldBindJSON(&profile); err != nil {
-//         ctx.JSON(http.StatusBadRequest, gin.H{"status": "fail", "message": err.Error()})
-//         return
-//     }
-
-//     status, err := service.CreateEmployeeTable(&profile)
-//     if err != nil {
-//         ctx.JSON(http.StatusBadGateway, gin.H{"status": "fail", "message": err.Error()})
-//         return
-//     }
-
-//     ctx.JSON(http.StatusCreated, gin.H{"status": status})
-// }
 
 func UpdateEmployeeTable(ctx *gin.Context) {
 	var profile *models.UpdatDetails
@@ -34,7 +15,7 @@ func UpdateEmployeeTable(ctx *gin.Context) {
 		return
 	}
 	customer, err := service.UpdateemployeerTable(profile.OldName, profile.NewName)
-	
+
 	if err != nil {
 		ctx.JSON(http.StatusBadGateway, gin.H{"status": "fail", "message": err.Error()})
 		return
@@ -71,6 +52,73 @@ func GetEmployeeById(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusCreated, gin.H{"status": "success", "data": val})
 }
+func CreateEmployeeTable(ctx *gin.Context) {
+	var profile models.Employee
+	if err := ctx.ShouldBindJSON(&profile); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"status": "fail", "message": err.Error()})
+		return
+	}
+
+	status, err := service.CreateEmployeeTable(&profile)
+	if err != nil {
+		ctx.JSON(http.StatusBadGateway, gin.H{"status": "fail", "message": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusCreated, gin.H{"status": status})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// func GetEmployeesHandler(ctx *gin.Context) {
+// 	employees, err := service.GetAllEmployees()
+// 	if err != nil {
+// 		ctx.JSON(http.StatusInternalServerError, gin.H{"status": "fail", "message": err.Error()})
+// 		return
+// 	}
+
+// 	ctx.JSON(http.StatusOK, gin.H{"status": "success", "data": employees})
+// }
 
 // func CreateEmployeeTable(ctx *gin.Context) {
 // 	var profile models.Employee
@@ -104,18 +152,19 @@ func GetEmployeeById(ctx *gin.Context) {
 // }
 
 // Add more controller functions for retrieving, updating, and deleting employees as needed.
-func CreateEmployeeTable(ctx *gin.Context) {
-	var profile models.Employee
-	if err := ctx.ShouldBindJSON(&profile); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"status": "fail", "message": err.Error()})
-		return
-	}
 
-	status, err := service.CreateEmployeeTable(&profile)
-	if err != nil {
-		ctx.JSON(http.StatusBadGateway, gin.H{"status": "fail", "message": err.Error()})
-		return
-	}
+// func CreateEmployeeTable(ctx *gin.Context) {
+//     var profile models.Employee
+//     if err := ctx.ShouldBindJSON(&profile); err != nil {
+//         ctx.JSON(http.StatusBadRequest, gin.H{"status": "fail", "message": err.Error()})
+//         return
+//     }
 
-	ctx.JSON(http.StatusCreated, gin.H{"status": status})
-}
+//     status, err := service.CreateEmployeeTable(&profile)
+//     if err != nil {
+//         ctx.JSON(http.StatusBadGateway, gin.H{"status": "fail", "message": err.Error()})
+//         return
+//     }
+
+//     ctx.JSON(http.StatusCreated, gin.H{"status": status})
+// }
